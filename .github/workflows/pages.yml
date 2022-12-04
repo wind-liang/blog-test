@@ -4,12 +4,21 @@ on:
   push:
     branches:
       - main # default branch
+env:
+  THEME_REPO: JoeyBling/hexo-theme-yilia-plus
+  THEME_BRANCH: master
 
 jobs:
   pages:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Checkout theme repo
+        uses: actions/checkout@v2
+        with:
+          repository: ${{ env.THEME_REPO }}
+          ref: ${{ env.THEME_BRANCH }}
+          path: themes/yilia-plus
       - name: Use Node.js 14.x
         uses: actions/setup-node@v2
         with:
